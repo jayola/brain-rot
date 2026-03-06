@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE VOID | Brain-Rot Central</title>
+    <style>
+        :root {
+            --bg: #00FF41; /* Matrix Green */
+            --btn: #FF00F5; /* Neon Pink */
+            --txt: #000000;
+        }
+
+        body {
+            background-color: var(--bg);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-weight: 900;
+        }
+
+        /* Glitch Effect for Title */
+        .title {
+            font-size: clamp(3rem, 15vw, 7rem);
+            text-align: center;
+            line-height: 0.8;
+            margin-bottom: 2rem;
+            color: white;
+            text-shadow: 5px 5px 0px var(--txt);
+            transform: skew(-5deg);
+        }
+
+        /* Neobrutalist Button */
+        #void-btn {
+            background: var(--btn);
+            color: white;
+            padding: 30px 60px;
+            font-size: 1.5rem;
+            border: 6px solid var(--txt);
+            box-shadow: 15px 15px 0px var(--txt);
+            cursor: pointer;
+            transition: 0.1s;
+            text-transform: uppercase;
+        }
+
+        #void-btn:active {
+            box-shadow: 0px 0px 0px var(--txt);
+            transform: translate(15px, 15px);
+        }
+
+        /* Submission Link */
+        .submit-link {
+            margin-top: 40px;
+            color: var(--txt);
+            text-decoration: underline;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Marquee at bottom */
+        .marquee {
+            position: absolute;
+            bottom: 0;
+            background: var(--txt);
+            color: var(--bg);
+            width: 100%;
+            padding: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">BRAIN<br>DELETED</div>
+
+    <button id="void-btn" onclick="scramble()">FEED THE ROT</button>
+
+    <a href="mailto:submit@yourdomain.com?subject=Weird Site" class="submit-link">SUBMIT WEIRDNESS</a>
+
+    <div class="marquee">
+        <span>SKIBIDI VIBES ONLY • NO THOUGHTS JUST VIBES • 404 BRAIN NOT FOUND • RELAX YOUR JAW • DRINK WATER • DONT CLICK • </span>
+    <div id="counter-display" style="font-size: 1.2rem; margin-bottom: 10px; color: black; background: white; padding: 5px 10px; border: 3px solid black; box-shadow: 4px 4px 0px black;">
+    BRAINCELLS LOST: <span id="count">0</span>
+</div>
+
+<script>
+    // Initialize the counter from browser memory
+    let count = localStorage.getItem('braincells') || 0;
+    document.getElementById('count').innerText = count;
+
+    const sites = [
+        "https://cat-bounce.com/",
+        "https://neal.fun/stimulation-clicker/",
+        "https://www.staggeringbeauty.com/",
+        "https://eelslap.com/",
+        "https://pointerpointer.com/",
+        "https://zoomquilt.org/",
+        "https://longdogechallenge.com/",
+        "https://endless.horse/",
+        "https://papertoilet.com/",
+        "https://checkboxrace.com/",
+        "https://puginarug.com/",
+        "https://onesquareminesweeper.com/",
+        "https://alwaysjudging.com/",
+        "https://burymewithmymoney.com/",
+        "https://make-everything-ok.com/",
+        "https://fallingfalling.com/",
+        "https://screamintothevoid.com/"
+    ];
+
+    function scramble() {
+        // Update the counter
+        count++;
+        localStorage.setItem('braincells', count);
+        
+        // Pick the site
+        const pick = sites[Math.floor(Math.random() * sites.length)];
+        
+        // Small delay so they see the counter go up before the page flips
+        setTimeout(() => {
+            window.location.href = pick;
+        }, 150);
+    }
+</script>
+  
+</body>
+</html>
