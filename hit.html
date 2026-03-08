@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #00FF41; overflow: hidden; margin: 0; }
+        #target { 
+            position: absolute; width: 80px; height: 80px; 
+            background: black; border: 4px solid white; 
+            color: white; display: flex; align-items: center; 
+            justify-content: center; cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+    <div id="target" onclick="move()">HIT</div>
+    <script>
+        function move() {
+            const t = document.getElementById('target');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            t.style.left = x + 'px';
+            t.style.top = y + 'px';
+            t.innerText = "W"; // Success meme
+        }
+        move(); // Start
+    </script>
+</body>
+</html>
