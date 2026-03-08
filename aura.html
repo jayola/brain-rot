@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #FF00F5; font-family: 'Arial Black'; text-align: center; overflow: hidden; }
+        #aura { font-size: 100px; cursor: pointer; transition: 0.1s; display: inline-block; }
+        #aura:active { transform: scale(1.5) rotate(10deg); }
+        .score { font-size: 40px; color: white; -webkit-text-stroke: 2px black; }
+        .floating-text { position: absolute; color: white; font-weight: bold; pointer-events: none; animation: fly 1s forwards; }
+        @keyframes fly { to { transform: translateY(-100px); opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="score">AURA: <span id="val">0</span></div>
+    <div id="aura" onclick="clickGame()">💀</div>
+    <script>
+        let score = 0;
+        function clickGame() {
+            score += 100;
+            document.getElementById('val').innerText = score;
+            // Add floating "Brain-rot" text
+            const words = ["+100 RIZZ", "SIGMA", "NO CAP", "AURA+"];
+            const txt = document.createElement("div");
+            txt.className = "floating-text";
+            txt.innerText = words[Math.floor(Math.random() * words.length)];
+            txt.style.left = event.clientX + "px";
+            txt.style.top = event.clientY + "px";
+            document.body.appendChild(txt);
+            setTimeout(() => txt.remove(), 1000);
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #FF00F5; font-family: 'Arial Black'; text-align: center; overflow: hidden; }
+        #aura { font-size: 100px; cursor: pointer; transition: 0.1s; display: inline-block; }
+        #aura:active { transform: scale(1.5) rotate(10deg); }
+        .score { font-size: 40px; color: white; -webkit-text-stroke: 2px black; }
+        .floating-text { position: absolute; color: white; font-weight: bold; pointer-events: none; animation: fly 1s forwards; }
+        @keyframes fly { to { transform: translateY(-100px); opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="score">AURA: <span id="val">0</span></div>
+    <div id="aura" onclick="clickGame()">💀</div>
+    <script>
+        let score = 0;
+        function clickGame() {
+            score += 100;
+            document.getElementById('val').innerText = score;
+            // Add floating "Brain-rot" text
+            const words = ["+100 RIZZ", "SIGMA", "NO CAP", "AURA+"];
+            const txt = document.createElement("div");
+            txt.className = "floating-text";
+            txt.innerText = words[Math.floor(Math.random() * words.length)];
+            txt.style.left = event.clientX + "px";
+            txt.style.top = event.clientY + "px";
+            document.body.appendChild(txt);
+            setTimeout(() => txt.remove(), 1000);
+        }
+    </script>
+</body>
+</html>
