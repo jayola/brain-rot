@@ -1,64 +1,53 @@
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background: #FF00F5; font-family: 'Arial Black'; text-align: center; overflow: hidden; }
-        #aura { font-size: 100px; cursor: pointer; transition: 0.1s; display: inline-block; }
-        #aura:active { transform: scale(1.5) rotate(10deg); }
-        .score { font-size: 40px; color: white; -webkit-text-stroke: 2px black; }
-        .floating-text { position: absolute; color: white; font-weight: bold; pointer-events: none; animation: fly 1s forwards; }
-        @keyframes fly { to { transform: translateY(-100px); opacity: 0; } }
-    </style>
-</head>
-<body>
-    <div class="score">AURA: <span id="val">0</span></div>
-    <div id="aura" onclick="clickGame()">💀</div>
-    <script>
-        let score = 0;
-        function clickGame() {
-            score += 100;
-            document.getElementById('val').innerText = score;
-            // Add floating "Brain-rot" text
-            const words = ["+100 RIZZ", "SIGMA", "NO CAP", "AURA+"];
-            const txt = document.createElement("div");
-            txt.className = "floating-text";
-            txt.innerText = words[Math.floor(Math.random() * words.length)];
-            txt.style.left = event.clientX + "px";
-            txt.style.top = event.clientY + "px";
-            document.body.appendChild(txt);
-            setTimeout(() => txt.remove(), 1000);
+        body { background: #FF00F5; font-family: 'Arial Black', sans-serif; text-align: center; overflow: hidden; margin: 0; }
+        .score { font-size: 40px; color: white; -webkit-text-stroke: 2px black; margin-top: 20px; }
+        
+        #aura { font-size: 120px; cursor: pointer; transition: 0.1s; display: inline-block; margin-top: 50px; user-select: none; }
+        #aura:active { transform: scale(1.3) rotate(5deg); }
+
+        .floating-text { 
+            position: absolute; 
+            color: #00FF41; /* Bright Green for contrast */
+            font-size: 30px;
+            font-weight: 900; 
+            -webkit-text-stroke: 1.5px black; /* Black outline makes it readable */
+            pointer-events: none; 
+            animation: fly 2s ease-out forwards; /* Slower animation (2 seconds) */
+            white-space: nowrap;
         }
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body { background: #FF00F5; font-family: 'Arial Black'; text-align: center; overflow: hidden; }
-        #aura { font-size: 100px; cursor: pointer; transition: 0.1s; display: inline-block; }
-        #aura:active { transform: scale(1.5) rotate(10deg); }
-        .score { font-size: 40px; color: white; -webkit-text-stroke: 2px black; }
-        .floating-text { position: absolute; color: white; font-weight: bold; pointer-events: none; animation: fly 1s forwards; }
-        @keyframes fly { to { transform: translateY(-100px); opacity: 0; } }
+
+        @keyframes fly { 
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-200px) scale(1.5); opacity: 0; } 
+        }
     </style>
 </head>
 <body>
     <div class="score">AURA: <span id="val">0</span></div>
-    <div id="aura" onclick="clickGame()">💀</div>
+    <div id="aura" onclick="clickGame(event)">💀</div>
+
     <script>
         let score = 0;
-        function clickGame() {
+        function clickGame(event) {
             score += 100;
             document.getElementById('val').innerText = score;
-            // Add floating "Brain-rot" text
-            const words = ["+100 RIZZ", "SIGMA", "NO CAP", "AURA+"];
+
+            const words = ["+100 RIZZ", "SIGMA", "NO CAP", "AURA+", "W COOKING", "GOATED"];
             const txt = document.createElement("div");
             txt.className = "floating-text";
             txt.innerText = words[Math.floor(Math.random() * words.length)];
-            txt.style.left = event.clientX + "px";
+            
+            // Center the text on the click
+            txt.style.left = (event.clientX - 50) + "px";
             txt.style.top = event.clientY + "px";
+            
             document.body.appendChild(txt);
-            setTimeout(() => txt.remove(), 1000);
+            setTimeout(() => txt.remove(), 2000);
         }
     </script>
 </body>
