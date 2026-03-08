@@ -5,140 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE VOID | Brain-Rot Central</title>
     <style>
-        :root {
-            --bg: #00FF41; /* Matrix Green */
-            --btn: #FF00F5; /* Neon Pink */
-            --txt: #000000;
-        }
+        :root { --bg: #00FF41; --btn: #FF00F5; --txt: #000000; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: 'Courier New', monospace; background: var(--bg); }
 
-        body {
-            background-color: var(--bg);
-            font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            font-weight: 900;
-        }
+        /* The Iframe Window */
+        #content-frame { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; z-index: 1; }
 
-        /* Glitch Effect for Title */
-        .title {
-            font-size: clamp(3rem, 15vw, 7rem);
-            text-align: center;
-            line-height: 0.8;
-            margin-bottom: 2rem;
-            color: white;
-            text-shadow: 5px 5px 0px var(--txt);
-            transform: skew(-5deg);
-        }
+        /* Landing Screen */
+        #landing { position: absolute; z-index: 10; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); }
+        .title { font-size: clamp(3rem, 15vw, 6rem); text-align: center; line-height: 0.8; color: white; text-shadow: 6px 6px 0px var(--txt); transform: rotate(-2deg); margin-bottom: 2rem; }
 
-        /* Neobrutalist Button */
-        #void-btn {
-            background: var(--btn);
-            color: white;
-            padding: 30px 60px;
-            font-size: 1.5rem;
-            border: 6px solid var(--txt);
-            box-shadow: 15px 15px 0px var(--txt);
-            cursor: pointer;
-            transition: 0.1s;
-            text-transform: uppercase;
-        }
-
-        #void-btn:active {
-            box-shadow: 0px 0px 0px var(--txt);
-            transform: translate(15px, 15px);
-        }
-
-        /* Submission Link */
-        .submit-link {
-            margin-top: 40px;
-            color: var(--txt);
-            text-decoration: underline;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        /* Marquee at bottom */
-        .marquee {
-            position: absolute;
-            bottom: 0;
-            background: var(--txt);
-            color: var(--bg);
-            width: 100%;
-            padding: 10px 0;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        .marquee span {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 15s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100%, 0); }
-        }
+        /* Floating UI */
+        #ui-layer { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 15px; pointer-events: none; }
+        #void-btn { pointer-events: auto; background: var(--btn); color: white; padding: 20px 40px; font-size: 1.5rem; border: 5px solid var(--txt); box-shadow: 8px 8px 0px var(--txt); cursor: pointer; font-weight: 900; text-transform: uppercase; }
+        #void-btn:active { box-shadow: 0px 0px 0px var(--txt); transform: translate(8px, 8px); }
+        
+        #counter-sticker { background: white; border: 3px solid black; padding: 5px 15px; box-shadow: 4px 4px 0px black; transform: rotate(3deg); font-weight: bold; pointer-events: auto; }
     </style>
 </head>
 <body>
 
-    <div class="title">BRAIN<br>DELETED</div>
+    <div id="landing">
+        <div class="title">NO<br>THOUGHTS</div>
+        <div id="counter-sticker" style="margin-bottom: 20px;">BRAINCELLS LOST: <span id="count">0</span></div>
+        <button id="void-btn" onclick="nextSite()">ENTER THE VOID</button>
+    </div>
 
-    <button id="void-btn" onclick="scramble()">FEED THE ROT</button>
+    <iframe id="content-frame" src=""></iframe>
 
-    <a href="mailto:submit@yourdomain.com?subject=Weird Site" class="submit-link">SUBMIT WEIRDNESS</a>
+    <div id="ui-layer" style="display: none;">
+        <button id="void-btn" onclick="nextSite()">FEED THE ROT</button>
+        <div id="counter-sticker">LOST: <span id="count-ui">0</span></div>
+    </div>
 
-    <div class="marquee">
-        <span>SKIBIDI VIBES ONLY • NO THOUGHTS JUST VIBES • 404 BRAIN NOT FOUND • RELAX YOUR JAW • DRINK WATER • DONT CLICK • </span>
-    <div id="counter-display" style="font-size: 1.2rem; margin-bottom: 10px; color: black; background: white; padding: 5px 10px; border: 3px solid black; box-shadow: 4px 4px 0px black;">
-    BRAINCELLS LOST: <span id="count">0</span>
-</div>
+    <script>
+        let count = localStorage.getItem('braincells') || 0;
+        document.getElementById('count').innerText = count;
+        document.getElementById('count-ui').innerText = count;
 
-<script>
-    // Initialize the counter from browser memory
-    let count = localStorage.getItem('braincells') || 0;
-    document.getElementById('count').innerText = count;
+        const sites = [
+            "https://neal.fun/stimulation-clicker/",
+            "https://pointerpointer.com/",
+            "https://zzz.zoomquilt.org/",
+            "https://longdogechallenge.com/",
+            "https://puginarug.com/",
+            "https://checkboxrace.com/",
+            "https://onesquareminesweeper.com/",
+            "https://alwaysjudging.com/",
+            "https://fallingfalling.com/"
+        ];
 
-    const sites = [
-        "https://cat-bounce.com/",
-        "https://neal.fun/stimulation-clicker/",
-        "https://www.staggeringbeauty.com/",
-        "https://eelslap.com/",
-        "https://pointerpointer.com/",
-        "https://zoomquilt.org/",
-        "https://longdogechallenge.com/",
-        "https://endless.horse/",
-        "https://papertoilet.com/",
-        "https://checkboxrace.com/",
-        "https://puginarug.com/",
-        "https://onesquareminesweeper.com/",
-        "https://alwaysjudging.com/",
-        "https://burymewithmymoney.com/",
-        "https://make-everything-ok.com/",
-        "https://fallingfalling.com/",
-        "https://screamintothevoid.com/"
-    ];
+        function nextSite() {
+            count++;
+            localStorage.setItem('braincells', count);
+            document.getElementById('count').innerText = count;
+            document.getElementById('count-ui').innerText = count;
 
-    function scramble() {
-        // Update the counter
-        count++;
-        localStorage.setItem('braincells', count);
-        
-        // Pick the site
-        const pick = sites[Math.floor(Math.random() * sites.length)];
-        
-        // Small delay so they see the counter go up before the page flips
-        setTimeout(() => {
-            window.location.href = pick;
-        }, 150);
-    }
-</script>
-  
+            const pick = sites[Math.floor(Math.random() * sites.length)];
+            
+            document.getElementById('content-frame').src = pick;
+            document.getElementById('content-frame').style.display = 'block';
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('ui-layer').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
